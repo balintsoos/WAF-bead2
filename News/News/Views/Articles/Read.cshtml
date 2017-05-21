@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = Model.Title;
+}
+
+<style>
+    .contentImage {
+        max-width: 100%;
+    }
+</style>
+
+@if (ViewBag.Image != null)
+{
+    <a href="@Url.Action("Images", new { id = Model.Id })">
+        <img src="@Url.Action("Image", new { imageId = ViewBag.Image })" class="contentImage" />
+    </a>
+}
+<h2>@Model.Title</h2>
+<i>@Model.Author</i><br />
+(@Model.PublishedAt)
+<hr />
+
+<p>@Model.Summary</p>
+
+<p>@Model.Content</p>
+
