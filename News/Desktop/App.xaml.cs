@@ -104,7 +104,7 @@ namespace Desktop
                                        ImageHandler.OpenAndResize(dialog.FileName, 600));
                 }
             }
-            catch { }
+            catch(Exception ex) { }
         }
 
         private void ViewModel_ExitApplication(object sender, System.EventArgs e)

@@ -82,7 +82,7 @@ namespace Service.Controllers
             db.Images.Add(image);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = image.Id }, image);
+            return Created(Request.RequestUri + image.Id.ToString(), image.Id);
         }
 
         // DELETE: api/Images/5

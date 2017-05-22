@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections.ObjectModel;
 
 namespace Persistence
 {
@@ -37,5 +38,10 @@ namespace Persistence
         public Boolean isLead { get; set; }
 
         public virtual ICollection<Image> Images { get; set; }
+
+        public Article()
+        {
+            Images = new Collection<Image>();
+        }
     }
 }

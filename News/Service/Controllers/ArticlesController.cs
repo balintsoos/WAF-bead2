@@ -19,16 +19,23 @@ namespace Service.Controllers
         // GET: api/Articles
         public IHttpActionResult GetArticles()
         {
-            return Ok(db.Articles.ToList().Select(article => new Article
+            try
             {
-                Id = article.Id,
-                Title = article.Title,
-                Summary = article.Summary,
-                Content = article.Content,
-                PublishedAt = article.PublishedAt,
-                Author = article.Author,
-                isLead = article.isLead,
-            }));
+                return Ok(db.Articles.ToList().Select(article => new Article
+                {
+                    Id = article.Id,
+                    Title = article.Title,
+                    Summary = article.Summary,
+                    Content = article.Content,
+                    PublishedAt = article.PublishedAt,
+                    Author = article.Author,
+                    isLead = article.isLead,
+                }));
+            }
+            catch
+            {
+                return InternalServerError();
+            }
         }
 
         // GET: api/Articles/5
