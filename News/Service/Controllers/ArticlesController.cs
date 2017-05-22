@@ -17,9 +17,18 @@ namespace Service.Controllers
         private NewsModel db = new NewsModel();
 
         // GET: api/Articles
-        public IQueryable<Article> GetArticles()
+        public IHttpActionResult GetArticles()
         {
-            return db.Articles;
+            return Ok(db.Articles.ToList().Select(article => new Article
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Summary = article.Summary,
+                Content = article.Content,
+                PublishedAt = article.PublishedAt,
+                Author = article.Author,
+                isLead = article.isLead,
+            }));
         }
 
         // GET: api/Articles/5
@@ -51,6 +60,11 @@ namespace Service.Controllers
 
             db.Entry(article).State = EntityState.Modified;
 
+            if (article.isLead)
+            {
+                ChangeLeadArticle(article.Id);
+            }
+
             try
             {
                 db.SaveChanges();
@@ -80,6 +94,12 @@ namespace Service.Controllers
             }
 
             db.Articles.Add(article);
+
+            if (article.isLead)
+            {
+                ChangeLeadArticle(article.Id);
+            }
+
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = article.Id }, article);
@@ -113,6 +133,20 @@ namespace Service.Controllers
         private bool ArticleExists(int id)
         {
             return db.Articles.Count(e => e.Id == id) > 0;
+        }
+
+        private void ChangeLeadArticle(Int32 ArticleId)
+        {
+            var articles = db.Articles.Where(article => article.isLead && article.Id != ArticleId);
+
+            foreach (var article in articles)
+            {
+                db.Entry(article).State = EntityState.Modified;
+
+                article.isLead = false;
+            }
+
+            db.SaveChanges();
         }
     }
 }

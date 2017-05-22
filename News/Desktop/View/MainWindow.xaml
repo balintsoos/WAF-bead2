@@ -4,9 +4,69 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Desktop"
+        xmlns:system="clr-namespace:System;assembly=mscorlib" 
+        xmlns:viewModel="clr-namespace:Desktop.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Random News - Articles" Height="350" Width="525">
+    <Window.Resources>
+        <viewModel:ArticleImageConverter x:Key="articleImageConverter"/>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="110" />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Database">
+                <MenuItem Header="Load articles" Command="{Binding LoadCommand}"/>
+                <MenuItem Header="Save articles" Command="{Binding SaveCommand}" IsEnabled="{Binding IsLoaded}"/>
+                <Separator />
+                <MenuItem Header="Exit" Command="{Binding ExitCommand}" />
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Name="articleGrid" Grid.Row="1" Grid.ColumnSpan="2" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Articles}" SelectedItem="{Binding SelectedArticle}">
+            <!-- adatrács, amelynek megadjuk az oszlopait -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
+                <DataGridTextColumn Header="Summary" Binding="{Binding Summary}"  />
+                <DataGridTextColumn Header="Content" Binding="{Binding Content}" />
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <Button Content="Add" Margin="6,5,0,5" Command="{Binding CreateArticleCommand}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Edit" Margin="6,5,0,5" Command="{Binding UpdateArticleCommand}" CommandParameter="{Binding SelectedArticle}" Width="114" IsEnabled="{Binding IsLoaded}" />
+            <Button Content="Delete" Margin="6,5,6,5" Command="{Binding DeleteArticleCommand}" CommandParameter="{Binding SelectedArticle}" Width="114" IsEnabled="{Binding IsLoaded}" />
+        </StackPanel>
+
+        <ListBox Grid.Row="3" Grid.ColumnSpan="2" Name="imageListBox" ItemsSource="{Binding ElementName=articleGrid, Path=SelectedItem.Images}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+            <!-- az épülethez tartozó képeket egy listba helyezzük, amely vízszintesen görgethető -->
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                    <!-- megadjuk, hogy az elemeket víszintesen helyezze el -->
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Image Height="100" Width="Auto" Source="{Binding ImageSmall, Converter={StaticResource articleImageConverter}}" />
+                    <!-- képmegjelenítőt használunk konverzióval -->
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
+            <Button Content="Add new image" Margin="6,5,0,5" Command="{Binding CreateImageCommand}" CommandParameter="{Binding SelectedArticle}" HorizontalAlignment="Left" Width="120" IsEnabled="{Binding IsLoaded}" />
+        </Grid>
     </Grid>
 </Window>

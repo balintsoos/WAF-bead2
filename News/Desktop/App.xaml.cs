@@ -27,7 +27,7 @@ namespace Desktop
 
         private void App_Startup(object sender, StartupEventArgs e)
         {
-            _model = new DesktopModel(new NewsService("http://localhost:19243")); // megadjuk a szolgáltatás címét
+            _model = new DesktopModel(new NewsService("http://localhost:53634")); // megadjuk a szolgáltatás címét
 
             _loginViewModel = new LoginViewModel(_model);
             _loginViewModel.ExitApplication += new EventHandler(ViewModel_ExitApplication);

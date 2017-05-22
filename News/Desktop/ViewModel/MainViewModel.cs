@@ -80,7 +80,12 @@ namespace Desktop.ViewModel
 
             CreateArticleCommand = new DelegateCommand(param =>
             {
-                EditedArticle = new Article();  // a szerkesztett épület új lesz
+                EditedArticle = new Article
+                {
+                    PublishedAt = DateTime.Now,
+                    Author = "admin",
+                };
+
                 OnArticleEditingStarted();
             });
             CreateImageCommand = new DelegateCommand(param => OnImageEditingStarted((param as Article).Id));
@@ -172,7 +177,7 @@ namespace Desktop.ViewModel
                 Articles = new ObservableCollection<Article>(_model.Articles); // az adatokat egy követett gyűjteménybe helyezzük
                 IsLoaded = true;
             }
-            catch (ServiceUnavailableException)
+            catch (ServiceUnavailableException ex)
             {
                 OnMessageApplication("A betöltés sikertelen! Nincs kapcsolat a kiszolgálóval.");
             }

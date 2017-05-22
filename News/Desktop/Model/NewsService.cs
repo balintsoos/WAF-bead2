@@ -59,7 +59,7 @@ namespace Desktop.Model
         {
             try
             {
-                HttpResponseMessage response = await _client.PutAsJsonAsync("api/Articles/", article);
+                HttpResponseMessage response = await _client.PutAsJsonAsync("api/Articles/" + article.Id, article);
                 return response.IsSuccessStatusCode;
             }
             catch (Exception ex)
