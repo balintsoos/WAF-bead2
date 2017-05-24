@@ -18,6 +18,12 @@ namespace Desktop.Model
             _client.BaseAddress = new Uri(baseAddress);
         }
 
+        public NewsService(String baseAddress, HttpMessageHandler handler)
+        {
+            _client = new HttpClient(handler);
+            _client.BaseAddress = new Uri(baseAddress);
+        }
+
         public async Task<IEnumerable<Article>> LoadArticlesAsync()
         {
             try

@@ -37,9 +37,8 @@
             <!-- adatrács, amelynek megadjuk az oszlopait -->
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Title" Binding="{Binding Title}" />
-                <DataGridTextColumn Header="Summary" Binding="{Binding Summary}"  />
-                <DataGridTextColumn Header="Content" Binding="{Binding Content}" />
                 <DataGridTextColumn Header="Author" Binding="{Binding Author}" />
+                <DataGridTextColumn Header="Published at" Binding="{Binding PublishedAt}" />
             </DataGrid.Columns>
         </DataGrid>
 

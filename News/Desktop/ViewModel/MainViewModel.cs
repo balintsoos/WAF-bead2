@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Persistence;
 using Desktop.Model;
+using System.Windows;
 
 namespace Desktop.ViewModel
 {
@@ -122,9 +123,13 @@ namespace Desktop.ViewModel
             if (article == null || !Articles.Contains(article))
                 return;
 
-            Articles.Remove(article);
+            MessageBoxResult result = MessageBox.Show("Do you want to delete this article?", "Delete article", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
-            _model.DeleteArticle(article);
+            if (result == MessageBoxResult.Yes)
+            {
+                Articles.Remove(article);
+                _model.DeleteArticle(article);
+            }
         }
 
         private void SaveChanges()
@@ -188,7 +193,7 @@ namespace Desktop.ViewModel
             try
             {
                 await _model.SaveAsync();
-                OnMessageApplication("A mentés sikeres!");
+                OnMessageApplication("Data saved");
             }
             catch (ServiceUnavailableException)
             {
