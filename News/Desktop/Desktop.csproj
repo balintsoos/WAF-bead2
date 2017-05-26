@@ -66,6 +66,7 @@
     <Compile Include="Model\ArticleEventArgs.cs" />
     <Compile Include="Model\DesktopModel.cs" />
     <Compile Include="Model\IDesktopModel.cs" />
+    <Compile Include="Model\LeadImageMissingException.cs" />
     <Compile Include="Model\ServiceUnavailableException.cs" />
     <Compile Include="ViewModel\Converters\ArticleImageConverter.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />

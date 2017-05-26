@@ -53,6 +53,7 @@ namespace Service.Controllers
 
         // PUT: api/Articles/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutArticle(int id, Article article)
         {
             if (!ModelState.IsValid)
@@ -93,6 +94,7 @@ namespace Service.Controllers
 
         // POST: api/Articles
         [ResponseType(typeof(Article))]
+        [Authorize]
         public IHttpActionResult PostArticle(Article article)
         {
             if (!ModelState.IsValid)
@@ -100,7 +102,16 @@ namespace Service.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Articles.Add(article);
+            db.Articles.Add(new Article
+            {
+                Id = article.Id,
+                Title = article.Title,
+                Summary = article.Summary,
+                Content = article.Content,
+                Author = article.Author,
+                PublishedAt = article.PublishedAt,
+                isLead = article.isLead
+            });
 
             if (article.isLead)
             {
@@ -114,6 +125,7 @@ namespace Service.Controllers
 
         // DELETE: api/Articles/5
         [ResponseType(typeof(Article))]
+        [Authorize]
         public IHttpActionResult DeleteArticle(int id)
         {
             Article article = db.Articles.Find(id);

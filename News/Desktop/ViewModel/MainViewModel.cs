@@ -140,12 +140,12 @@ namespace Desktop.ViewModel
                 OnMessageApplication("Az cím nincs megadva!");
                 return;
             }
-            if (EditedArticle.Summary == null)
+            if (String.IsNullOrEmpty(EditedArticle.Summary))
             {
                 OnMessageApplication("Az összefoglaló nincs megadva!");
                 return;
             }
-            if (EditedArticle.Content == null)
+            if (String.IsNullOrEmpty(EditedArticle.Content))
             {
                 OnMessageApplication("A tartalom nincs megadva!");
                 return;
@@ -195,9 +195,17 @@ namespace Desktop.ViewModel
                 await _model.SaveAsync();
                 OnMessageApplication("Data saved");
             }
-            catch (ServiceUnavailableException)
+            catch (Exception ex)
             {
-                OnMessageApplication("A mentés sikertelen! Nincs kapcsolat a kiszolgálóval.");
+                if (ex is ServiceUnavailableException)
+                {
+                    OnMessageApplication("A mentés sikertelen! Nincs kapcsolat a kiszolgálóval.");
+                }
+
+                if (ex is InvalidOperationException)
+                {
+                    OnMessageApplication(ex.Message);
+                }
             }
         }
 

@@ -146,6 +146,11 @@ namespace Desktop.Model
             {
                 Boolean result = true;
 
+                if (article.isLead == true && article.Images.Count == 0)
+                {
+                    throw new InvalidOperationException("Save failed on lead article '" + article.Title + "': At least 1 image is required!");
+                }
+
                 // az állapotjelzőnek megfelelő műveletet végezzük el
                 switch (_articleFlags[article])
                 {
