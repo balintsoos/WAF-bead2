@@ -8,6 +8,8 @@ namespace Service.Models
     {
         DbSet<Article> Articles { get; set; }
 
+        DbSet<Image> Images { get; set; }
+
         Int32 SaveChanges();
     }
 }

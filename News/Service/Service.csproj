@@ -160,6 +160,7 @@
     <Compile Include="Models\AdministratorDbContext.cs" />
     <Compile Include="Models\IdentityGuest.cs" />
     <Compile Include="Models\INewsEntities.cs" />
+    <Compile Include="Models\INewsService.cs" />
     <Compile Include="Models\NewsService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
