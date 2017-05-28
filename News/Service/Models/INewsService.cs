@@ -18,7 +18,6 @@ namespace Service.Models
         Boolean AddImage(Image image);
 
         Boolean DeleteArticle(Article article);
-        Boolean DeleteImage(Image image);
 
         Boolean EditArticle(Article article);
 

@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Service.Models;
 using Persistence;
 
 namespace Service.Controllers
@@ -15,6 +16,8 @@ namespace Service.Controllers
     public class ImagesController : ApiController
     {
         private NewsModel db = new NewsModel();
+
+        private INewsService _newsService = new NewsService(new NewsEntities());
 
         // GET: api/Images
         public IQueryable<Image> GetImages()
@@ -26,7 +29,7 @@ namespace Service.Controllers
         [ResponseType(typeof(Image))]
         public IHttpActionResult GetImage(int id)
         {
-            Image image = db.Images.Find(id);
+            Image image = _newsService.GetImage(id);
             if (image == null)
             {
                 return NotFound();
@@ -37,6 +40,7 @@ namespace Service.Controllers
 
         // PUT: api/Images/5
         [ResponseType(typeof(void))]
+        [Authorize]
         public IHttpActionResult PutImage(int id, Image image)
         {
             if (!ModelState.IsValid)
@@ -72,6 +76,7 @@ namespace Service.Controllers
 
         // POST: api/Images
         [ResponseType(typeof(Image))]
+        [Authorize]
         public IHttpActionResult PostImage(Image image)
         {
             if (!ModelState.IsValid)
@@ -79,14 +84,14 @@ namespace Service.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Images.Add(image);
-            db.SaveChanges();
+            _newsService.AddImage(image);
 
             return Created(Request.RequestUri + image.Id.ToString(), image.Id);
         }
 
         // DELETE: api/Images/5
         [ResponseType(typeof(Image))]
+        [Authorize]
         public IHttpActionResult DeleteImage(int id)
         {
             Image image = db.Images.Find(id);

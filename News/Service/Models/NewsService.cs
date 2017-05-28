@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Persistence;
+using System.Data.Entity;
 
 namespace Service.Models
 {
@@ -68,7 +69,7 @@ namespace Service.Models
             {
                 _entities.SaveChanges();
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
             }
@@ -114,13 +115,19 @@ namespace Service.Models
             return true;
         }
 
-        public Boolean DeleteImage(Image image)
-        {
-            return true;
-        }
-
         public Boolean EditArticle(Article article)
         {
+            //_entities.Entry(article).State = EntityState.Modified;
+
+            try
+            {
+                _entities.SaveChanges();
+            }
+            catch
+            {
+                return false;
+            }
+
             return true;
         }
     }

@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Service.Models;
 using Persistence;
 
 namespace Service.Controllers
@@ -16,12 +17,14 @@ namespace Service.Controllers
     {
         private NewsModel db = new NewsModel();
 
+        private INewsService _newsService = new NewsService(new NewsEntities());
+
         // GET: api/Articles
         public IHttpActionResult GetArticles()
         {
             try
             {
-                return Ok(db.Articles.ToList().Select(article => new Article
+                return Ok(_newsService.Articles.Select(article => new Article
                 {
                     Id = article.Id,
                     Title = article.Title,
@@ -42,7 +45,7 @@ namespace Service.Controllers
         [ResponseType(typeof(Article))]
         public IHttpActionResult GetArticle(int id)
         {
-            Article article = db.Articles.Find(id);
+            Article article = _newsService.GetArticle(id);
             if (article == null)
             {
                 return NotFound();
@@ -102,23 +105,12 @@ namespace Service.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Articles.Add(new Article
-            {
-                Id = article.Id,
-                Title = article.Title,
-                Summary = article.Summary,
-                Content = article.Content,
-                Author = article.Author,
-                PublishedAt = article.PublishedAt,
-                isLead = article.isLead
-            });
+            _newsService.AddArticle(article);
 
             if (article.isLead)
             {
                 ChangeLeadArticle(article.Id);
             }
-
-            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = article.Id }, article);
         }
@@ -128,14 +120,13 @@ namespace Service.Controllers
         [Authorize]
         public IHttpActionResult DeleteArticle(int id)
         {
-            Article article = db.Articles.Find(id);
+            Article article = _newsService.GetArticle(id);
             if (article == null)
             {
                 return NotFound();
             }
 
-            db.Articles.Remove(article);
-            db.SaveChanges();
+            _newsService.DeleteArticle(article);
 
             return Ok(article);
         }
