@@ -1,0 +1,61 @@
+﻿@using MyExam.Models;
+
+@model TeacherRegistrationViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) // egy űrlapban töltjük ki a tartalmat
+{
+    @Html.AntiForgeryToken() // védelem XSRF támadás ellen
+
+    <table>
+        <tr>
+            <td colspan="3">
+                <div class="failureNotification">@Html.ValidationSummary(true, "A regisztráció sikertelen!")</div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="contentHead">
+                    Bejelentkezési adatok:
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td width="150" colspan="2">
+                Felhasználónév:
+            </td>
+            <td class="failureNotificationSmall">
+                @Html.EditorFor(guest => guest.UserId)
+                @Html.ValidationMessageFor(guest => guest.UserId)
+            </td>
+        </tr>
+        <tr>
+            <td width="150" colspan="2">
+                Jelszó:
+            </td>
+            <td class="failureNotificationSmall">
+                @Html.EditorFor(guest => guest.UserPassword)
+                @Html.ValidationMessageFor(guest => guest.UserPassword)
+            </td>
+        </tr>
+        <tr>
+            <td width="150" colspan="2">
+                Jelszó megismétlése:
+            </td>
+            <td class="failureNotificationSmall">
+                @Html.EditorFor(guest => guest.UserConfirmPassword)
+                @Html.ValidationMessageFor(guest => guest.UserConfirmPassword)
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" height="70">
+                <br />A felhasználónév és a jelszó minimum 5, maximum 40 karakter hosszú lehet. Csak betűt, számot és kötőjelet tartalmathat.<br /><br />
+                <input type="submit" value="Regisztráció" class="button" />
+            </td>
+        </tr>
+    </table>
+}
+

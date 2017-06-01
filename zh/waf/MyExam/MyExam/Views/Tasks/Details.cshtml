@@ -1,0 +1,74 @@
+﻿@model MyExam.Models.Task
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Answer3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Answer3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GoodAnswer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GoodAnswer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Course.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Course.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
