@@ -1,0 +1,93 @@
+﻿@model IEnumerable<MyExam.Models.Exam>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.A1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.A2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.A3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.A4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Student.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task.Question)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task1.Question)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task2.Question)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Task3.Question)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.A1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.A2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.A3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.A4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Student.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Task.Question)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Task1.Question)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Task2.Question)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Task3.Question)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

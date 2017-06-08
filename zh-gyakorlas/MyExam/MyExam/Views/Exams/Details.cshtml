@@ -1,0 +1,106 @@
+﻿@model MyExam.Models.Exam
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Exam</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.A4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.A4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Student.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Student.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Task.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Task1.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task1.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Task2.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task2.Question)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Task3.Question)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Task3.Question)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
