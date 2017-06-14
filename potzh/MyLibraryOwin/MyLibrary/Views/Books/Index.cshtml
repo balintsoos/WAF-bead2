@@ -1,0 +1,59 @@
+﻿@model List<MyLibrary.Models.BookViewModel>
+
+@{
+    ViewBag.Title = "Books";
+}
+
+<h2>Books</h2>
+
+@using (Html.BeginForm())
+{
+    <p>
+        @Html.TextBox("SearchString")
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        <th>
+            Author
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+            Number of copies
+        </th>
+        <th>
+            Available
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Author)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.copyCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.availableCount)
+        </td>
+        <td>
+            @Html.ActionLink("Copies", "Details", new { id=item.ISBN })
+        </td>
+    </tr>
+}
+
+</table>

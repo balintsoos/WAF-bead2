@@ -1,0 +1,30 @@
+﻿@model List<MyLibrary.Models.CopyViewModel>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Copies of @ViewBag.ISBN</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Condition
+        <th>
+            Status
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+    }
+
+</table>
